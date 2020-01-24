@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Artikel;
+use \App\KategoriPengumuman;
 use Illuminate\Http\Request;
 
-class ArtikelAPIController extends Controller
+class KategoriPengumumanAPIController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,12 +13,11 @@ class ArtikelAPIController extends Controller
      */
     public function index()
     {
-        $artikels=Artikel::all();
+        $kategoriPengumumans=KategoriPengumuman::all();
 
-        return $artikels;
+        return $kategoriPengumumans->toJson();
     }
 
-    
     /**
      * Store a newly created resource in storage.
      *
@@ -29,8 +28,8 @@ class ArtikelAPIController extends Controller
     {
         $input=$request->all();
         
-        $artikel=Artikel::create($input);
-        return $artikel;
+        $kategoriPengumuman=KategoriPengumuman::create($input);
+        return $kategoriPengumuman;
     }
 
     /**
@@ -41,8 +40,9 @@ class ArtikelAPIController extends Controller
      */
     public function show($id)
     {
-        $artikel=Artikel::find($id);
-        return $artikel;
+        $kategoriPengumuman=KategoriPengumuman::find($id);
+        
+        return $kategoriPengumuman;
     }
 
 
@@ -57,13 +57,13 @@ class ArtikelAPIController extends Controller
     {
         $input=$request->all();
 
-        $artikel=Artikel::find($id);
-        if(empty($artikel)){
+        $kategoriPengumuman=KategoriPengumuman::find($id);
+        if(empty($kategoriPengumuman)){
             return response()->json(['message'=>'data tidak ditemukan'],404);
         }
-        $artikel->update($input);
+        $kategoriPengumuman->update($input);
 
-return response()->json($artikel);
+return response()->json($kategoriPengumuman);
     }
 
     /**
@@ -74,12 +74,14 @@ return response()->json($artikel);
      */
     public function destroy($id)
     {
-        $artikel=Artikel::find($id);
+        
+        $kategoriPengumuman=KategoriPengumuman::find($id);
 
-        if(empty($artikel)){
+        if(empty($kategoriPengumuman)){
             return response()->json(['message'=>'data tidak ditemukan'],404); 
         }
-        $artikel->delete();
+        $kategoriPengumuman->delete();
         return response()->json(['message'=>'data telah di hapus']); 
     }
-}
+    }
+

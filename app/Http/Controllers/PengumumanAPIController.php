@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Artikel;
+use App\Pengumuman;
 use Illuminate\Http\Request;
 
-class ArtikelAPIController extends Controller
+class PengumumanAPIController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,12 +13,11 @@ class ArtikelAPIController extends Controller
      */
     public function index()
     {
-        $artikels=Artikel::all();
+        $pengumuman=Pengumuman::all();
 
-        return $artikels;
+        return $pengumuman;
     }
 
-    
     /**
      * Store a newly created resource in storage.
      *
@@ -29,8 +28,8 @@ class ArtikelAPIController extends Controller
     {
         $input=$request->all();
         
-        $artikel=Artikel::create($input);
-        return $artikel;
+        $pengumuman=Pengumuman::create($input);
+        return $pengumuman;
     }
 
     /**
@@ -41,8 +40,8 @@ class ArtikelAPIController extends Controller
      */
     public function show($id)
     {
-        $artikel=Artikel::find($id);
-        return $artikel;
+        $pengumuman=Pengumuman::find($id);
+        return $pengumuman;  
     }
 
 
@@ -57,13 +56,13 @@ class ArtikelAPIController extends Controller
     {
         $input=$request->all();
 
-        $artikel=Artikel::find($id);
-        if(empty($artikel)){
+        $pengumuman=Pengumuman::find($id);
+        if(empty($pengumuman)){
             return response()->json(['message'=>'data tidak ditemukan'],404);
         }
-        $artikel->update($input);
+        $pengumuman->update($input);
 
-return response()->json($artikel);
+return response()->json($pengumuman);
     }
 
     /**
@@ -74,12 +73,12 @@ return response()->json($artikel);
      */
     public function destroy($id)
     {
-        $artikel=Artikel::find($id);
+        $pengumuman=Pengumuman::find($id);
 
-        if(empty($artikel)){
+        if(empty($pengumuman)){
             return response()->json(['message'=>'data tidak ditemukan'],404); 
         }
-        $artikel->delete();
+        $pengumuman->delete();
         return response()->json(['message'=>'data telah di hapus']); 
     }
 }

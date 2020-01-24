@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Artikel;
+use \App\Galeri;
 use Illuminate\Http\Request;
 
-class ArtikelAPIController extends Controller
+class GaleriAPIController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,25 +13,25 @@ class ArtikelAPIController extends Controller
      */
     public function index()
     {
-        $artikels=Artikel::all();
+        $galeri=Galeri::all();
 
-        return $artikels;
+        return $galeri->toJson();
     }
 
-    
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $input=$request->all();
-        
-        $artikel=Artikel::create($input);
-        return $artikel;
-    }
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+   public function store(Request $request)
+   {
+       $input=$request->all();
+       
+       $galeri=Galeri::create($input);
+       return $galeri;
+ 
+   }
 
     /**
      * Display the specified resource.
@@ -41,10 +41,10 @@ class ArtikelAPIController extends Controller
      */
     public function show($id)
     {
-        $artikel=Artikel::find($id);
-        return $artikel;
+        $galeri=Galeri::find($id);
+        
+        return $galeri;
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -55,15 +55,16 @@ class ArtikelAPIController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $input=$request->all();
 
-        $artikel=Artikel::find($id);
-        if(empty($artikel)){
+        $galeri=Galeri::find($id);
+        if(empty($galeri)){
             return response()->json(['message'=>'data tidak ditemukan'],404);
         }
-        $artikel->update($input);
+        $galeri->update($input);
 
-return response()->json($artikel);
+return response()->json($galeri);
     }
 
     /**
@@ -74,12 +75,14 @@ return response()->json($artikel);
      */
     public function destroy($id)
     {
-        $artikel=Artikel::find($id);
+        
+        $galeri=Galeri::find($id);
 
-        if(empty($artikel)){
+        if(empty($galeri)){
             return response()->json(['message'=>'data tidak ditemukan'],404); 
         }
-        $artikel->delete();
+        $galeri->delete();
         return response()->json(['message'=>'data telah di hapus']); 
+    
     }
 }

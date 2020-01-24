@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Artikel;
+use \App\Berita;
 use Illuminate\Http\Request;
 
-class ArtikelAPIController extends Controller
+class BeritaAPIController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,12 +13,12 @@ class ArtikelAPIController extends Controller
      */
     public function index()
     {
-        $artikels=Artikel::all();
+        $beritas=Berita::all();
 
-        return $artikels;
+        return $beritas->toJson();
     }
 
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -29,8 +29,8 @@ class ArtikelAPIController extends Controller
     {
         $input=$request->all();
         
-        $artikel=Artikel::create($input);
-        return $artikel;
+        $beritas=Berita::create($input);
+        return $beritas;
     }
 
     /**
@@ -41,10 +41,10 @@ class ArtikelAPIController extends Controller
      */
     public function show($id)
     {
-        $artikel=Artikel::find($id);
-        return $artikel;
+        $berita=Berita::find($id);
+        
+        return $berita;
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -57,13 +57,13 @@ class ArtikelAPIController extends Controller
     {
         $input=$request->all();
 
-        $artikel=Artikel::find($id);
-        if(empty($artikel)){
+        $berita=Berita::find($id);
+        if(empty($berita)){
             return response()->json(['message'=>'data tidak ditemukan'],404);
         }
-        $artikel->update($input);
+        $berita->update($input);
 
-return response()->json($artikel);
+return response()->json($berita);
     }
 
     /**
@@ -74,12 +74,12 @@ return response()->json($artikel);
      */
     public function destroy($id)
     {
-        $artikel=Artikel::find($id);
+        $berita=Berita::find($id);
 
-        if(empty($artikel)){
+        if(empty($berita)){
             return response()->json(['message'=>'data tidak ditemukan'],404); 
         }
-        $artikel->delete();
+        $berita->delete();
         return response()->json(['message'=>'data telah di hapus']); 
     }
 }

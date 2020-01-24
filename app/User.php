@@ -40,8 +40,26 @@ class User extends Authenticatable
     public function artikels(){
         return $this->hasMany(\App\Artikel::class,'users_id','id');
     }
-
+    
     public function kategoriArtikels(){
         return $this->hasMany(\App\KategoriArtikel::class,'users_id','id');
+    }
+    public function beritas(){
+        return $this->hasMany(\App\Berita::class,'users_id','id');
+    }
+    public function kategoriBeritas(){
+        return $this->hasMany(\App\KategoriBerita::class,'user_id','id');
+    }
+    public function galeris(){
+        return $this->hasMany(\App\galeri::class,'users_id','id');
+    }
+    public function kategoriGaleris(){
+        return $this->hasMany(\App\kategoriGaleri::class,'user_id','id');
+    }
+    public function pengumumans(){
+        return $this->hasMany(\App\Pengumuman::class,'users_id','id');
+    }
+    public function kategoripengumumans(){
+        return $this->hasMany(\App\KategoriPengumuman::class,'user_id','id');
     }
 }
